@@ -1,0 +1,41 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: rabbitmq-consumer
+  cloud:
+    config:
+      enabled: false
+      discovery:
+        enabled: false
+    stream:
+      rabbit:
+        bindings:
+          tradeUpdatedInput:
+            consumer:
+              bindingRoutingKey: trade.event.updated
+          tradeCreatedInput:
+            consumer:
+              bindingRoutingKey: trade.event.created
+          tradeFinalizedInput:
+            consumer:
+              bindingRoutingKey: trade.event.finalized
+      bindings:
+        tradeUpdatedInput:
+          destination: trade
+          group: trade-updated-queue
+          contentType: application/json
+        tradeCreatedInput:
+          destination: trade
+          group: trade-created-queue
+          contentType: application/json
+        tradeFinalizedInput:
+          destination: trade
+          group: trade-finalized-queue
+          contentType: application/json
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq_user
+    password: 'ymXURN0Vo9ahbFmfhPu7'

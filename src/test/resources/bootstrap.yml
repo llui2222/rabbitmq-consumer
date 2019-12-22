@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: template-service
+  cloud:
+    config:
+      enabled: false
+      discovery:
+        enabled: false
